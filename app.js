@@ -32,12 +32,13 @@ fetchLastThirtyDays()  //set Today values
 
 
 function update30DaysChart(e) {
-    console.log(e.target.previousElementSibling.classList.add("active"));
+    e.target.previousElementSibling.classList.remove("isHidden");
     fetchLastThirtyDays().then(data => {
         const dates = data.map(item => item.data);
         const prices = data.map(item => item.cena)
         lineChart.data.labels = dates;
         lineChart.data.datasets[0].data = prices;
+        console.log(dates, prices)
         lineChart.update();
     });
 }

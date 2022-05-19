@@ -50,14 +50,11 @@ body {
     text-align: center;
 }
 #thirtyDays__lineChart {
-    max-width: 0;
-    max-height: 0;
-}
-#thirtyDays__lineChart.active {
     width: 100%;
-    height: auto;
-    max-height: 40rem;
-    min-width: auto;
+    max-height: 30rem;
+}
+#thirtyDays__lineChart.isHidden {
+    display: none !important;
 }
 
 
