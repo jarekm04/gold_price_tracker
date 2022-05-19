@@ -15,10 +15,22 @@
     <p>Data from: NBP</p>
 </section>
 
-<section class="tenYears">
-    <button class="tenYears__btn">download data from the last 10 years</button>
+<section class="price-today">
+    <h2 class="price-today__title">Price Today - 20.20.2000</h2>
+    <p class="price-today__pln">999.99 PLN</p>
 </section>
 
+<section class="price-thirtyDays">
+    <h2>Last 30 days</h2>
+    <canvas id="thirtyDays__lineChart"></canvas>
+    <button class="thirtyDays__btn">Get Price from last 30 days</button>
+</section>
+
+<section class="price-tenYears">
+    <button class="tenYears__btn">Download data from the last 10 years</button>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
