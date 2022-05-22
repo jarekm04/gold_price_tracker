@@ -51,7 +51,7 @@ const lineChart10Years = new Chart($chartTenYears, {
 });
 
 const fetchLast30Days = async () => { //get 30 days gold price
-    let response = await fetch('http://api.nbp.pl/api/cenyzlota/last/30/?format=json');
+    let response = await fetch('https://api.nbp.pl/api/cenyzlota/last/30/?format=json');
     let data = await response.json();
 
     return data;
