@@ -2,6 +2,25 @@ const $dateToday = document.querySelector(".price-today__title");
 const $priceToday = document.querySelector(".price-today__pln");
 const $chartThirtyDays = document.getElementById("thirtyDays__lineChart");
 const $chartTenYears = document.getElementById("tenYears__lineChart");
+const $progressBar = document.querySelector(".circular-progress");
+const $valueContainer = document.querySelector(".value-container");
+
+//------------progress bar-----------------------
+let progressValue = 0;
+let progressEndValue = 100;
+let speed = 1;
+
+const progress = setInterval(() => {
+   progressValue++;
+   $valueContainer.textContent = `${progressValue}%`;
+   $progressBar.style.background = `conic-gradient(
+       #4d5bf9 ${progressValue * 3.6}deg,
+       #cadcff ${progressValue * 3.6}deg
+   )`;
+   progressValue === progressEndValue ? clearInterval(progress) : null;
+}, speed);
+
+//-----------------------------------------------
 
 const lineChart30Days = new Chart($chartThirtyDays, {
     type: 'line',
@@ -31,24 +50,27 @@ const lineChart10Years = new Chart($chartTenYears, {
     }
 });
 
-const fetchLastThirtyDays = async () => { //get 30 days gold price
+const fetchLast30Days = async () => { //get 30 days gold price
     let response = await fetch('http://api.nbp.pl/api/cenyzlota/last/30/?format=json');
     let data = await response.json();
 
     return data;
 }
 
-fetchLastThirtyDays()  //set today values
+fetchLast30Days()  //set today values
     .then((data) => {
-        $dateToday.textContent = `Today - ${data[data.length - 1].data}`;
-        $priceToday.textContent = `Price - ${data[data.length - 1].cena} PLN`;
+        setTimeout(() => {
+            $dateToday.textContent = `Today - ${data[data.length - 1].data}`;
+            $priceToday.textContent = `Price - ${data[data.length - 1].cena} PLN`;
+            $progressBar.style.display = 'none';
+        }, 900)
     })
     .catch(error => console.log(error.message));
 
 
-function update30DaysChart(e) { //set 30 days line chart
+function updateLast30DaysChart(e) { //set 30 days line chart
     e.target.previousElementSibling.classList.remove("isHidden");
-    fetchLastThirtyDays().then(data => {
+    fetchLast30Days().then(data => {
         const dates = data.map(item => item.data);
         const prices = data.map(item => item.cena);
         lineChart30Days.data.labels = dates;
@@ -57,7 +79,7 @@ function update30DaysChart(e) { //set 30 days line chart
     });
 }
 
-document.querySelector(".thirtyDays__btn").addEventListener("click", update30DaysChart);
+document.querySelector(".thirtyDays__btn").addEventListener("click", updateLast30DaysChart);
 
 //-----------------------------------------------------------------------------------
 const urls = [
@@ -73,7 +95,7 @@ const urls = [
     'https://api.nbp.pl/api/cenyzlota/2022-01-04/?format=json'
 ];
 
-const fetchLastTenYears = async (e) => { //get and set 10 years line chart
+const fetchLast10Years = async (e) => { //get and set 10 years line chart
     await Promise.all(urls.map(url =>
         fetch(url).then(resp => resp.json())
     )).then(data => {
@@ -88,5 +110,5 @@ const fetchLastTenYears = async (e) => { //get and set 10 years line chart
     })
 }
 
-document.querySelector(".tenYears__btn").addEventListener("click", fetchLastTenYears);
+document.querySelector(".tenYears__btn").addEventListener("click", fetchLast10Years);
 

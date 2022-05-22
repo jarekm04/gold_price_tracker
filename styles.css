@@ -18,6 +18,31 @@ body {
     color: var(--main-color);
 }
 
+.circular-progress {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 5rem;
+    width: 5rem;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.circular-progress:before {
+    content: '';
+    position: absolute;
+    height: 85%;
+    width: 85%;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+}
+.value-container {
+    position: relative;
+    font-size: 1.6rem;
+    color: var(--main-color)
+}
+
 .title,
 .price-today,
 .price-thirtyDays,
