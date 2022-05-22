@@ -45,25 +45,23 @@ body {
     text-align: center;
 }
 
-.price-thirtyDays h2 {
+.price-thirtyDays h2,
+.price-tenYears h2 {
     font-size: 3rem;
     text-align: center;
 }
-#thirtyDays__lineChart {
+#thirtyDays__lineChart,
+#tenYears__lineChart {
     width: 100%;
     max-height: 30rem;
 }
-#thirtyDays__lineChart.isHidden {
+#thirtyDays__lineChart.isHidden,
+#tenYears__lineChart.isHidden {
     display: none !important;
 }
 
-
-
-
-
-
-.tenYears__btn,
-.thirtyDays__btn {
+.thirtyDays__btn,
+.tenYears__btn {
     font-size: 1.5rem;
     background-color: var(--main-color);
     color: var(--secondary-color);
@@ -72,11 +70,12 @@ body {
     border-radius: 5rem;
     cursor: pointer;
     transition: .2s ease;
+    margin-top: 2rem;
     margin-left: 50%;
     transform: translateX(-50%);
 }
-.tenYears__btn:hover,
-.thirtyDays__btn:hover {
+.thirtyDays__btn:hover,
+.tenYears__btn:hover {
     background-color: var(--secondary-color);
     color: var(--main-color);
     border: 1px solid var(--main-color);
